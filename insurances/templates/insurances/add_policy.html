@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت بیمه‌نامه جدید</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .form-container { background: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+        button { background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px;}
+        button:hover { background-color: #218838; }
+        .back-link { display: block; text-align: center; margin-top: 15px; text-decoration: none; color: #007bff;}
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>ثبت بیمه‌نامه جدید</h2>
+        
+        <form method="post">
+            {% csrf_token %} <!-- این خط برای امنیت فرم الزامی است -->
+            
+            <!-- این حلقه فیلدهای فرم را به صورت خودکار می‌سازد -->
+            {% for field in form %}
+                <div class="form-group">
+                    <label>{{ field.label_tag }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div style="color: red; font-size: 12px;">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <button type="submit">ثبت بیمه‌نامه</button>
+        </form>
+        
+        <a href="{% url 'policy_list' %}" class="back-link">بازگشت به لیست بیمه‌نامه‌ها</a>
+    </div>
+</body>
+</html>

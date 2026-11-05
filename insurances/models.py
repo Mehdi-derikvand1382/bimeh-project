@@ -8,7 +8,7 @@ class Policy(models.Model):
 
     )
 
-    Policy_number = models.CharField(max_length=20, unique=True, verbose_name=" شماره بیمه نامه " )
+    policy_number = models.CharField(max_length=20, unique=True, verbose_name=" شماره بیمه نامه " )
     holder_name = models.CharField(max_length=100, verbose_name=" name bime gozar")
     policy_type = models.CharField(max_length=20, choices=POLICY_TYPES, verbose_name=" nooe bime")
     issue_date = models.DateField(verbose_name=" tarikh sodoor")
@@ -16,4 +16,4 @@ class Policy(models.Model):
 
 
     def __str__(self):
-        return f"{self.Policy_number} - {self.holder_name}"
+        return f"{self.policy_number} - {self.holder_name}"
