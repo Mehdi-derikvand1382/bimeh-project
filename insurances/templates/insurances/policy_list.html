@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لیست بیمه‌نامه‌ها</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; background-color: white; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: right; }
+        th { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <h2>لیست بیمه‌نامه‌های صادر شده</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>شماره بیمه‌نامه</th>
+                <th>نام بیمه‌گزار</th>
+                <th>نوع بیمه</th>
+                <th>تاریخ صدور</th>
+                <th>وضعیت</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for policy in policies %}
+                <tr>
+                    <td>{{ policy.policy_number }}</td>
+                    <td>{{ policy.holder_name }}</td>
+                    <td>{{ policy.get_policy_type_display }}</td>
+                    <td>{{ policy.issue_date }}</td>
+                    <td>{% if policy.is_active %} فعال {% else %} غیرفعال {% endif %}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center;">هیچ بیمه‌نامه‌ای یافت نشد.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
