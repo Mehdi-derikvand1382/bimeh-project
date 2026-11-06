@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تست API جنگو</title>
+    <style>
+        body { font-family: Tahoma; padding: 20px; background: #f4f4f4; }
+        input { width: 100%; padding: 10px; margin-bottom: 10px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+        pre { background: #fff; padding: 15px; border: 1px solid #ccc; direction: ltr; text-align: left; }
+    </style>
+</head>
+<body>
+    <h2>تست دسترسی به لیست بیمه‌نامه‌ها</h2>
+    <p>توکن خود را در کادر زیر پیست کنید و روی دکمه کلیک کنید:</p>
+    
+    <input type="text" id="tokenInput" placeholder="eyJhbGciOi... (توکن را اینجا پیست کنید)">
+    <button onclick="getData()">دریافت لیست از API</button>
+
+    <h3>نتیجه:</h3>
+    <pre id="result">در حال انتظار...</pre>
+
+    <script>
+        function getData() {
+            const token = document.getElementById('tokenInput').value;
+            const resultBox = document.getElementById('result');
+
+            if (!token) {
+                alert("لطفاً ابتدا توکن را وارد کنید!");
+                return;
+            }
+
+            fetch('http://127.0.0.1:8000/api/policies/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                resultBox.textContent = JSON.stringify(data, null, 2);
+                resultBox.style.color = 'green';
+            })
+            .catch(error => {
+                resultBox.textContent = "خطا: " + error.message;
+                resultBox.style.color = 'red';
+            });
+        }
+    </script>
+</body>
+</html>

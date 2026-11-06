@@ -4,11 +4,14 @@ from .forms import PolicyForm
 
 # Create your views here.
 
-from .models import Policy
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .serializers import PolicySerializer
 from rest_framework import generics 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+from .serializers import PolicySerializer
+
+from rest_framework.permissions import IsAuthenticated
+
 
 def policy_list(request):
     # gettig all insurances from database
@@ -48,4 +51,6 @@ def add_policy(request):
 class PolicyListCreateAPIView(generics.ListCreateAPIView):
     queryset = Policy.objects.all()
     serializer_class = PolicySerializer
+
+    permission_classes = [IsAuthenticated]
 
