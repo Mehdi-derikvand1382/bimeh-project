@@ -2,3 +2,37 @@
 "db.sqlite3" 
 "__pycache__/" 
 "*.pyc" 
+db.sqlite3
+reset_db.py
+*.pyc
+__pycache__/
+venv/
+
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+venv/
+env/
+.venv/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Static files (CSS, JavaScript, Images)
+staticfiles/
+/media/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
