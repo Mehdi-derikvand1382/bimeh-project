@@ -8,6 +8,7 @@ from .models import Policy
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import PolicySerializer
+from rest_framework import generics 
 
 def policy_list(request):
     # gettig all insurances from database
@@ -38,8 +39,13 @@ def add_policy(request):
     
 
 
-@api_view(['GET'])
-def policy_api_list(request):
-    policies = Policy.objects.all()
-    serializer = PolicySerializer(policies, many=True)
-    return Response(serializer.data)
+#@api_view(['GET'])
+#def policy_api_list(request):
+#    policies = Policy.objects.all()
+#    serializer = PolicySerializer(policies, many=True)
+#    return Response(serializer.data)
+
+class PolicyListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Policy.objects.all()
+    serializer_class = PolicySerializer
+
